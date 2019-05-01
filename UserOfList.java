@@ -1,4 +1,3 @@
-
 /**
  Test list features.
  */
@@ -32,7 +31,7 @@ public class UserOfList {
         System.out.println(
           "last element: " + list.get( list.size()-1) + " expecting \"y\"");
         System.out.println();
-
+        
         // set 
         setTest( 1            , new String("T"));
         setTest( 0            , new String("s"));
@@ -46,14 +45,14 @@ public class UserOfList {
         addAtTest( list.size(), new String("efficiently")
                  , "7 elements [students,s,T,u,d,Y,efficiently,]");
         System.out.println();
-
+        
         removeTest( 4            , "6 elements [students,s,T,u,Y,efficiently,]");
         removeTest( 0            , "5 elements [s,T,u,Y,efficiently,]");
         removeTest( list.size()-1, "4 elements [s,T,u,Y,]");;
         System.out.println();
     }
-
-
+    
+    
     /**
       Test the set() method, reporting and
       changing the value at index @modifyAt.
@@ -76,7 +75,7 @@ public class UserOfList {
                                  , Object value
                                  , String expect
                                  ) {
-
+        
         list.add( addAt, value);
         System.out.println(
             "insert " + value
@@ -85,3 +84,20 @@ public class UserOfList {
           + "expecting    " + expect
         );
     }
+    
+    
+    /**
+      Test the remove() method, reporting and
+      removing the value at index @modifyAt.
+     */
+    private static void removeTest( int index
+                                  , String expect
+                                  ) {
+        System.out.println(
+            "removed element " + index
+          + " whose value was " + list.remove( index) + MORE
+          + "resulting in " + list                    + MORE
+          + "expecting    " + expect
+          );
+    }
+}

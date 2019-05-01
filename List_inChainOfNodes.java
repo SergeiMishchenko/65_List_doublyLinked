@@ -4,16 +4,15 @@
 
 public class List_inChainOfNodes{
     private Node headSentinel;
-	private Node tailSentinel;
 
-
+     
     /**
       Construct an empty list
      */
     public List_inChainOfNodes() {
-        headSentinel = new Node( null, null);
-		tailSentinel = new Node( null, null);
-		headSentinel.setNextNode(tailSentinel);
+        headSentinel = new Node( null, null, null);
+		headSentinel.setNextNode(null);
+		headSentinel.setPreviousNode(null);
     }
 
     /**
@@ -37,19 +36,38 @@ public class List_inChainOfNodes{
        format:
            # elements [element0,element1,element2,]
       */
+    // public String toString() {
+        // String stringRep = size() + " elements [";
+
+        // for( Node node = headSentinel.getNextNode()
+           // ; node != null
+           // ; node = node.getNextNode() )
+            // stringRep += node.getCargo() + ",";
+        // return stringRep + "]";
+    // }
+
+    /**
+      Demo use of links to previous Nodes.
+
+      @return a string representation of this list,
+              iterating through the list
+              from tail to head.
+      format, using ` as separator
+          [element0`element1`element2`]
+     */
     public String toString() {
-        String stringRep = size() + " elements [";
+        String stringRep = "tail-first [";
 
         for( Node node = headSentinel.getNextNode()
-           ; node != null
-           ; node = node.getNextNode() )
+            ; node != null
+            ; node = node.getNextNode() )
             stringRep += node.getCargo() + ",";
         return stringRep + "]";
     }
 
-
     /**
       Append @value to the head of this list.
+
       @return true, in keeping with conventions yet to be discussed
      */
      public boolean addAsHead( Object val) {
@@ -66,7 +84,7 @@ public class List_inChainOfNodes{
     private Node getNodeBefore( int index) {
         /* iterate through the chain, up to the node
            that holds a reference to the desired node */
-
+           
         Node node;
         int upTo;  // comma operator precludes declaration in FOR
         for( upTo = 0   , node = headSentinel
@@ -100,6 +118,7 @@ public class List_inChainOfNodes{
 
     /**
       Set value at @index to @newValue
+
       @return old value at @index
       @precondition: @index is within the bounds of this list.
      */
@@ -110,6 +129,7 @@ public class List_inChainOfNodes{
 
     /**
       Insert @value at position @index in this list.
+
       Shift the element currently at that position (if any)
       and any subsequent elements to the right
       (that is, increase the index associated with each).
@@ -126,8 +146,10 @@ public class List_inChainOfNodes{
 
      /**
       Remove the element at position @index in this list.
+
       Shift any subsequent elements to the left (that is,
       decrease the index associated with each).
+
       @return the value that was removed from the list
      */
     public Object remove( int index) {

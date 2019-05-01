@@ -7,7 +7,7 @@
 public class Node {
     private Object cargo;
     private Node   nextNode;
-	private Node prevNode;
+	private Node previousNode;
 
 
     /**
@@ -21,11 +21,9 @@ public class Node {
         this( cargo);
         this.nextNode = nextNode;
     }
-
-	public Node( Object cargo, Node nextNode, Node prevNode) {
-        this( cargo);
-        this.nextNode = nextNode;
-		this.prevNode = prevNode;
+	    public Node( Object cargo, Node nextNode, Node previousNode) {
+        this( cargo,nextNode);
+        this.previousNode = previousNode;
     }
 
     /**
@@ -49,31 +47,29 @@ public class Node {
     public Node getNextNode() {
         return nextNode;
     }
+	public Node getPreviousNode(){
+		return previousNode;
+	}
+
 
     public Node setNextNode( Node nextNode) {
         Node saveForReturn = this.nextNode;
         this.nextNode = nextNode;
         return saveForReturn;
     }
-
+    public Node setPreviousNode( Node nextNode) {
+        Node saveForReturn = this.previousNode;
+        this.previousNode = previousNode;
+        return saveForReturn;
+    }
+    
     public Object getCargo() {
         return cargo;
     }
-
+    
     public Object setCargo( Object newValue) {
         Object saveForReturn = cargo;
         cargo = newValue;
         return saveForReturn;
     }
-
-	public Node getPrevNode() {
-		return prevNode;
-	}
-
-	public Node setPrevNode(Node prevNode){
-		Node returned = this.prevNode;
-		this.prevNode = prevNode;
-		return returned;
 }
-}
-
