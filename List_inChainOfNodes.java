@@ -1,3 +1,6 @@
+
+
+
 /**
   Represent a list, implemented in a chain of nodes
  */
@@ -11,8 +14,8 @@ public class List_inChainOfNodes{
      */
     public List_inChainOfNodes() {
         headSentinel = new Node( null, null, null);
-		headSentinel.setNextNode(null);
-		headSentinel.setPreviousNode(null);
+		headSentinel.setNextNode(headSentinel);
+		headSentinel.setPreviousNode(headSentinel);
     }
 
     /**
@@ -26,8 +29,8 @@ public class List_inChainOfNodes{
     // recursively-called helper
     private int size( Node startingAt) {
         Node next = startingAt.getNextNode();
-        if( next == null) return 0;
-        else return 1+ size( next);
+        if( next == headSentinel) return 0;
+        else return 1+ size( next) - 1; //remove count of headSentinel
     }
 
 
@@ -57,11 +60,14 @@ public class List_inChainOfNodes{
      */
     public String toString() {
         String stringRep = "tail-first [";
-
-        for( Node node = headSentinel.getNextNode()
+		int i = 0;
+        for( Node node = headSentinel.getPreviousNode()
             ; node != null
-            ; node = node.getNextNode() )
-            stringRep += node.getCargo() + ",";
+            ; node = node.getPreviousNode() ){
+            i++;
+			stringRep += node.getCargo() + "'";
+			System.out.println(stringRep);
+			}
         return stringRep + "]";
     }
 
@@ -72,7 +78,7 @@ public class List_inChainOfNodes{
      */
      public boolean addAsHead( Object val) {
         headSentinel.setNextNode(
-          new Node( val, headSentinel.getNextNode()));
+          new Node( val, headSentinel.getNextNode(), headSentinel));
         return true;
      }
 
@@ -139,7 +145,9 @@ public class List_inChainOfNodes{
         Node afterNew = /* the node that should follow newNode
           in the augmented list */
           getNodeBefore( index).setNextNode( newNode);
+		afterNew.setPreviousNode(newNode);
         newNode.setNextNode( afterNew);
+		newNode.setPreviousNode(getNodeBefore(index));
         return true;
     }
 
